@@ -19,7 +19,7 @@ Personal Acceess toknen needed for these scripts :  repo, admin:org, user
 
 
 
-#GET TEAMID 
+GET TEAMID 
 curl -v -H "Authorization: token <GITHUB_TOKEN>" https://api.github.com/orgs/:org/teams?page=1 -H "Accept: application/vnd.github.hellcat-preview+json"
 
 
