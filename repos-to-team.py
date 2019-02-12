@@ -12,6 +12,7 @@ parser.add_argument('--file', required=True, help="File to read users from")
 ORG_URL = 'https://api.github.com'
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_USER = os.environ.get('GITHUB_USER')
+GITHUB_ORG = os.environ.get('GITHUB_ORG')
 
 repos = []
 
@@ -39,8 +40,8 @@ def main():
     
     for repo in repos:
 
-        print("Adding {} to group {} ".format(repo,group))
-        team_url = ORG_URL+ '/teams/{}/repos/Bonniernews/{}'.format(group, repo)
+        print("Adding {} to group {} ".format(repo,org,group))
+        team_url = ORG_URL+ '/teams/{}/repos/{}/{}'.format(group, repo)
         r = requests.put(team_url, data='{"permission": "push"}', headers=headers, auth=(GITHUB_USER, GITHUB_TOKEN)) #read/write access 
     if r.status_code == 422:
         pass
