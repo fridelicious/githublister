@@ -4,7 +4,7 @@ import requests
 import os
 
 # Basic setup
-ORG_URL = 'https://api.github.com/orgs/:org/repos'
+ORG_URL = 'https://api.github.com/orgs/Bonniernews/repos'
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_USER = os.environ.get('GITHUB_USER')
 
@@ -35,6 +35,5 @@ def main():
     for repo_list in get_repos():
         for repo in repo_list:
             print(repo['name'])
-
 
 main()

@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 
 import requests
@@ -31,19 +32,20 @@ def main():
     if not os.environ.get('GITHUB_USER'):
         raise ValueError('You must set GITHUB_TOKEN')
 
-    print("Addings {} repos to {}".format(len(repos), group))
+    print("Adding {} repos to {}".format(len(repos), group))
     group_exists = requests.get(ORG_URL+ '/teams/{}/repos'.format(group), auth=(GITHUB_USER, GITHUB_TOKEN))
     group_exists.raise_for_status()
     headers = {'Accept': 'application/vnd.github.hellcat-preview+json'}
+    
     for repo in repos:
-    print("Adding {}".format(repo))
-        team_url = ORG_URL+ '/teams/{}/repos/:org/{}'.format(group, repo)
-        r = requests.put(team_url, headers=headers, auth=(GITHUB_USER, GITHUB_TOKEN)) #default read access
-        #r = requests.put(team_url, data='{"permission": "push"}', headers=headers, auth=(GITHUB_USER, GITHUB_TOKEN)) #read/write access 
-        if r.status_code == 422:
-          pass
-        else:
-          r.raise_for_status()
+
+        print("Adding {} to group {} ".format(repo,group))
+        team_url = ORG_URL+ '/teams/{}/repos/Bonniernews/{}'.format(group, repo)
+        r = requests.put(team_url, data='{"permission": "push"}', headers=headers, auth=(GITHUB_USER, GITHUB_TOKEN)) #read/write access 
+    if r.status_code == 422:
+        pass
+    else:
+        r.raise_for_status()
         print(r.status_code)
 
 main()
