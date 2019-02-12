@@ -4,9 +4,10 @@ import requests
 import os
 
 # Basic setup
-ORG_URL = 'https://api.github.com/orgs/Bonniernews/repos'
+# Github org is api https://api.github.com/orgs/:org/
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_USER = os.environ.get('GITHUB_USER')
+GITHUB_ORG = os.environ.get('GITHUB_API')
 
 
 # Generator for looping through the paged github results
@@ -14,7 +15,7 @@ def get_repos():
     has_next_page = True
     page = 1
     while has_next_page:
-        r = requests.get('{}?page={}&visibility=public'.format(ORG_URL, page), auth=(GITHUB_USER, GITHUB_TOKEN))
+        r = requests.get('{}?page={}&visibility=public'.format(GITHUB_ORG, page), auth=(GITHUB_USER, GITHUB_TOKEN))
         r.raise_for_status()
         links = r.headers['link'].split(',')
         has_next_page = any(
