@@ -4,7 +4,7 @@ import requests
 import os
 
 # Basic setup
-ORG_URL = 'https://api.github.com/orgs/BonnierNews/teams/2796912/members/fridabjoo'
+ORG_URL = 'https://api.github.com/orgs/:org/teams/:teamid/members/:user'
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_USER = os.environ.get('GITHUB_USER')
 
